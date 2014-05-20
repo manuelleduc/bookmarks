@@ -15,3 +15,5 @@ dist
 /.settings
 conf/*-dev.conf
 .target
+.cache
+/bin
