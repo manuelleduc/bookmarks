@@ -5,6 +5,7 @@ Scala documentation
 * Play reactivemongo plugin : https://github.com/ReactiveMongo/Play-ReactiveMongo
 * Reactivemongo : http://reactivemongo.org/
 * Secure social : http://securesocial.ws/
+* Play-Reactivemongo : http://stephane.godbillon.com/2012/10/18/writing-a-simple-app-with-reactivemongo-and-play-framework-pt-1.html (+ part 2, 3 and 4).
 
 Configuration
 =====================================
