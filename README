@@ -5,3 +5,25 @@ Scala documentation
 * Play reactivemongo plugin : https://github.com/ReactiveMongo/Play-ReactiveMongo
 * Reactivemongo : http://reactivemongo.org/
 * Secure social : http://securesocial.ws/
+
+Configuration
+=====================================
+
+conf/securesocial-dev.conf
+-------------------------------------
+```
+smtp {
+	host=smtp.gmail.com
+	#port=25
+	ssl=true
+	user="USER"
+	password="PASSWORD"
+	from="EMITER"
+}
+```
+
+conf/reactivemongo-dev.conf
+-------------------------------------
+```
+mongodb.uri ="mongodb://user:password@url:port/path"
+```
