@@ -1,5 +1,7 @@
 package models
 
 import play.api.libs.json.Json
+import reactivemongo.bson.BSONObjectID
 
-case class Bookmark(_id: Option[String], title: String, link: String, comment: String, tags: List[Tag] = List())
+case class Bookmark(id: Option[BSONObjectID], title: String,
+  link: String, comment: String, tags: Option[Seq[Tag]])

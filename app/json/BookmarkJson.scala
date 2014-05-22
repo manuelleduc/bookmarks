@@ -3,6 +3,9 @@ package json
 import models.Bookmark
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
+import reactivemongo.bson.BSONObjectID
+import play.modules.reactivemongo.json.BSONFormats._
+import models.Tag
 
 object BookmarkJson {
 
