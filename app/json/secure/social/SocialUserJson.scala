@@ -1,14 +1,8 @@
 package json.secure.social
 
-import reactivemongo.bson.BSONDocument
-import reactivemongo.bson.BSONDocumentReader
-import reactivemongo.bson.BSONDocumentWriter
-import securesocial.core.PasswordInfo
-import securesocial.core.AuthenticationMethod
-import securesocial.core.OAuth1Info
-import securesocial.core.IdentityId
-import securesocial.core.OAuth2Info
-import securesocial.core.SocialUser
+import play.api.libs.json._
+import securesocial.core._
+import play.api.libs.functional.syntax._
 
 object SocialUserJson {
 
@@ -23,58 +17,39 @@ object SocialUserJson {
   val keyOAuth2Info = "oAuth2Info"
   val keyPasswordInfo = "passwordInfo"
 
-  implicit object Reader extends BSONDocumentReader[SocialUser] {
+  import json.secure.social.AuthenticationMethodJson.authenticationMethodFormat
+  import json.secure.social.IdentityIdJson.identityIdFormat
+  import json.secure.social.OAuth1InfoJson.oAuth1InfoFormat
+  import json.secure.social.OAuth2InfoJson.oAuth2InfoFormat
+  import json.secure.social.PasswordInfoJson.passwordInfoFormat
 
-    def read(doc: BSONDocument): SocialUser = {
+  implicit val socialUserReads: Reads[SocialUser] = (
+    (JsPath \ keyIdentityId).read[IdentityId] and
+    (JsPath \ keyFirstName).read[String] and
+    (JsPath \ keyLastName).read[String] and
+    (JsPath \ keyFullName).read[String] and
+    (JsPath \ keyEmail).readNullable[String] and
+    (JsPath \ keyAvatarUrl).readNullable[String] and
+    (JsPath \ keyAuthMethod).read[AuthenticationMethod] and
+    (JsPath \ keyOAuth1Info).readNullable[OAuth1Info] and
+    (JsPath \ keyOAuth2Info).readNullable[OAuth2Info] and
+    (JsPath \ keyPasswordInfo).readNullable[PasswordInfo])(
+      (identityId, firstName, lastName, fullName, email, avatarUrl,
+        authMethod, oAuth1Info, oAuth2Info, passwordInfo) =>
+        SocialUser(identityId, firstName, lastName, fullName, email,
+          avatarUrl, authMethod, oAuth1Info, oAuth2Info, passwordInfo))
 
-      implicit val identityIdReader = json.secure.social.IdentityIdJson.Reader
-      implicit val authentificationMethodReader = json.secure.social.AuthenticationMethodJson.Reader
-      implicit val oAuth1InfoReader = json.secure.social.OAuth1InfoJson.Reader
-      implicit val oAuth2InfoReader = json.secure.social.OAuth2InfoJson.Reader
-      implicit val passwordInfoReader = json.secure.social.PasswordInfoJson.Reader
+  implicit val socialUserWrites: Writes[SocialUser] = (
+    (JsPath \ keyIdentityId).write[IdentityId] and
+    (JsPath \ keyFirstName).write[String] and
+    (JsPath \ keyLastName).write[String] and
+    (JsPath \ keyFullName).write[String] and
+    (JsPath \ keyEmail).writeNullable[String] and
+    (JsPath \ keyAvatarUrl).writeNullable[String] and
+    (JsPath \ keyAuthMethod).write[AuthenticationMethod] and
+    (JsPath \ keyOAuth1Info).writeNullable[OAuth1Info] and
+    (JsPath \ keyOAuth2Info).writeNullable[OAuth2Info] and
+    (JsPath \ keyPasswordInfo).writeNullable[PasswordInfo])(unlift(SocialUser.unapply))
 
-      val identityId = doc.getAs[IdentityId](keyIdentityId).get
-      val firstName = doc.getAs[String](keyFirstName).get
-      val lastName = doc.getAs[String](keyLastName).get
-      val fullName = doc.getAs[String](keyFullName).get
-      val email = doc.getAs[String](keyEmail)
-      val avatarUrl = doc.getAs[String](keyAvatarUrl)
-      val authMethod = doc.getAs[AuthenticationMethod](keyAuthMethod).get
-      val oAuth1Info = doc.getAs[OAuth1Info](keyOAuth1Info)
-      val oAuth2Info = doc.getAs[OAuth2Info](keyOAuth2Info)
-      val passwordInfo = doc.getAs[PasswordInfo](keyPasswordInfo)
-
-      SocialUser(identityId, firstName, lastName, fullName, email,
-        avatarUrl, authMethod,
-        oAuth1Info,
-        oAuth2Info,
-        passwordInfo)
-    }
-  }
-  
-  implicit val reader = Reader
-
-  implicit object Writer extends BSONDocumentWriter[SocialUser] {
-    override def write(socialUser: SocialUser): BSONDocument = {
-
-      implicit val identityIdWriter = json.secure.social.IdentityIdJson.Writer
-      implicit val authMethodWriter = json.secure.social.AuthenticationMethodJson.Writer
-      implicit val oAuth1InfoWriter = json.secure.social.OAuth1InfoJson.Writer
-      implicit val oAuth2InfoWriter = json.secure.social.OAuth2InfoJson.Writer
-      implicit val passwordInfoWriter = json.secure.social.PasswordInfoJson.Writer
-      
-      BSONDocument(keyIdentityId -> socialUser.identityId,
-        keyFirstName -> socialUser.firstName,
-        keyLastName -> socialUser.lastName,
-        keyFullName -> socialUser.fullName,
-        keyEmail -> socialUser.email,
-        keyAvatarUrl -> socialUser.avatarUrl,
-        keyAuthMethod -> socialUser.authMethod,
-        keyOAuth1Info -> socialUser.oAuth1Info,
-        keyOAuth2Info -> socialUser.oAuth2Info,
-        keyPasswordInfo -> socialUser.passwordInfo)
-    }
-  }
-  
-  implicit val writer = Writer
+  implicit val socialUserFormat = Format(socialUserReads, socialUserWrites)
 }
