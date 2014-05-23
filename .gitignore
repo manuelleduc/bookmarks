@@ -17,3 +17,4 @@ conf/*-dev.conf
 .target
 .cache
 /bin
+public/javascripts/libs/

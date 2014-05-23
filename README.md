@@ -10,6 +10,17 @@ Scala documentation
 Configuration
 =====================================
 
+gestion des dépendences javascript
+-------------------------------------
+Bower manages javascript dependencies.
+They are listed in bower.json
+
+To load them (node.js requires):
+```
+sudo npm install -g bower
+bower install
+```
+
 conf/securesocial-dev.conf
 -------------------------------------
 ```
