@@ -16,10 +16,10 @@ require.config({
 		}
 	},
 	paths : {
-		jquery : './libs/jquery',
-		underscore : './libs/underscore',
-		backbone : './libs/backbone',
-		text: './libs/require-text'
+		jquery : './libs/jquery/dist/jquery',
+		underscore : './libs/underscore/underscore',
+		backbone : './libs/backbone/backbone',
+		text: './libs/requirejs-text/text'
 	}
 });
 
@@ -29,13 +29,3 @@ require([ 'backbone', 'views/app', 'routers/router' ], function(Backbone,
 	Backbone.history.start();
 	new AppView();
 });
-
-// require([ 'backbone', 'views/app', 'routers/router' ], function(Backbone,
-// AppView, Workspace) {
-/* jshint nonew:false */
-// Initialize routing and start Backbone.history()
-// new Workspace();
-// Backbone.history.start();
-// Initialize the application view
-// new AppView();
-// });
