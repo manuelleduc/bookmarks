@@ -39,3 +39,4 @@ GET    /not-authorized           securesocial.controllers.ProviderController.not
 #						BOOKMARKS ROUTES    						#
 #####################################################################
 GET    /bookmarks                controllers.BookmarkController.list
+GET    /create-bookmark          controllers.BookmarkController.viewCreateForm

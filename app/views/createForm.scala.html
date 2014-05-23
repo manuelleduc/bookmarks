@@ -1,0 +1,12 @@
+@(createBookmarkForm:Form[Bookmark])
+
+@import helper.twitterBootstrap._
+@import helper._
+
+@main { 
+	
+	@inputText(
+                createBookmarkForm("link"), 
+                '_label -> "Link" 
+            )
+}
