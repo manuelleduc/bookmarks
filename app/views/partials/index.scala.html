@@ -1,0 +1,16 @@
+<div class="row" >
+	<div class="panel panel-default" ng-repeat="bookmark in bookmarks">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<a href="{{bookmark.link}}">{{ bookmark.title}}</a>
+			</h3>
+		</div>
+		<div class="panel-body">{{bookmark.comment}}</div>
+		<div class="panel-footer">
+			<span class="label label-info">Info1</span> <span
+				class="label label-info">Info2</span> <span class="label label-info">Info3</span>
+			<span class="label label-info">Info4</span> <span
+				class="label label-info">Info5</span>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+@(createBookmarkForm: Form[Bookmark])
+
+@import helper.twitterBootstrap._
+@import helper._
+
+<div>
+	<p class="bg-danger" ng-repeat="err in errorList">
+		<strong>{{err.key}} :</strong> {{err.message}}
+	</p>
+</div>
+
+<form>
+	@inputText(
+		createBookmarkForm("link"), 
+		'_label -> "Link",
+		Symbol("ng-model") -> "bookmark.link"
+	)
+	
+	@inputText(
+		createBookmarkForm("title"), 
+		'_label -> "Title",
+		Symbol("ng-model") -> "bookmark.title" 
+	)
+	
+	@textarea(
+		createBookmarkForm("comment"), 
+		'_label -> "Comment" ,
+		Symbol("ng-model") -> "bookmark.comment"
+	)
+	
+	@checkbox(
+		createBookmarkForm("public"), 
+		'_label -> "Public" ,
+		Symbol("ng-model") -> "bookmark.public"
+	)
+    <button ng-click="saveForm()">SAVE</button>
+</form>

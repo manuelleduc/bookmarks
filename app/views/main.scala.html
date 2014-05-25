@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" ng-app="bookmarkApp">
     <head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,11 +22,16 @@
         
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
-    <body role="document" id="bookmarkapp">
+    <body>
 			@topbar()
-    	<div class="container" id="bookmarkapp">
+    	<div class="container" id="bookmarkapp" ng-view>
         	@content
         </div>
-        <script data-main="@routes.Assets.at("javascripts/main")" src="@routes.Assets.at("javascripts/libs/requirejs/require.js")"></script>
+        <script  src="@routes.Assets.at("javascripts/libs/angular/angular.js")"></script>
+        <script  src="@routes.Assets.at("javascripts/libs/angular-route/angular-route.js")"></script>
+        <script  src="@routes.Assets.at("javascripts/libs/angular-resource/angular-resource.js")"></script>
+        <script  src="@routes.Assets.at("javascripts/app.js")"></script>
+        <script  src="@routes.Assets.at("javascripts/controllers/bookmark.js")"></script>
+        <script  src="@routes.Assets.at("javascripts/resources/bookmark.js")"></script>
     </body>
 </html>
