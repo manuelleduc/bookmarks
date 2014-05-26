@@ -1,4 +1,4 @@
-package controllers.api
+package controllers
 import play.api._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json._
@@ -13,8 +13,9 @@ import forms.CreateBookmarkForm
 import play.api.data.FormError
 import play.api.i18n.Messages
 import scala.concurrent.Future
+import json.playframework.FormErrorJson.formErrorFormat
 
-object BookmarkController extends Controller with MongoController with SecureSocial {
+object BookmarkApiController extends Controller with MongoController with SecureSocial {
   implicit val collectionBookmark = db.collection[JSONCollection]("bookmark")
   import json.BookmarkJson.bookmarkFormat
   def list = UserAwareAction { implicit request =>
@@ -53,4 +54,3 @@ object BookmarkController extends Controller with MongoController with SecureSoc
     }
   }
 }
-	

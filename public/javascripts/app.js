@@ -3,10 +3,10 @@ var phonecatApp = angular.module('bookmarkApp', [ 'ngRoute',
 
 phonecatApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/bookmarks', {
-		templateUrl : 'partials/list-bookmarks',
+		templateUrl : jsRoutes.controllers.BookmarkPartialsController.index().url,
 		controller : 'ListBookmarkCtrl'
 	}).when('/create-bookmark', {
-		templateUrl : 'partials/create-bookmark',
+		templateUrl : jsRoutes.controllers.BookmarkPartialsController.create().url,
 		controller : 'CreateBookmarkCtrl'
 	}).otherwise({
 		redirectTo : '/bookmarks'

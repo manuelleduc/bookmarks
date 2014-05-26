@@ -39,9 +39,12 @@ GET    /not-authorized             securesocial.controllers.ProviderController.n
 #						BOOKMARKS ROUTES    						#
 #####################################################################
 # API
-GET    /api/bookmarks              controllers.api.BookmarkController.list
-POST   /api/bookmarks              controllers.api.BookmarkController.create
+GET    /api/bookmarks              controllers.BookmarkApiController.list
+POST   /api/bookmarks              controllers.BookmarkApiController.create
 
 # ANUGLAR PARTIALS
-GET    /partials/list-bookmarks    controllers.partials.BookmarkController.index
-GET    /partials/create-bookmark   controllers.partials.BookmarkController.create
+GET    /partials/list-bookmarks    controllers.BookmarkPartialsController.index
+GET    /partials/create-bookmark   controllers.BookmarkPartialsController.create
+
+# JS ROUTES
+GET    /js-routes                  controllers.Application.jsRoutes

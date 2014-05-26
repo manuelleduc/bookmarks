@@ -1,4 +1,4 @@
 angular.module('bookmarkResource', ['ngResource']).
 	factory('BookmarkResource', function ($resource) {
-		return $resource("/api/bookmarks", {});
+		return $resource(jsRoutes.controllers.BookmarkApiController.list().url, {});
 	});
